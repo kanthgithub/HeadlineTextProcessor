@@ -613,4 +613,4 @@ No CommandLineRunner will be executed now, because they are not part of the conf
         assertNotNull(renderedShapesOnCanvas.get(5));
         assertEquals(shape_6,renderedShapesOnCanvas.get(5));
     }
-    ```
+    ```# HeadlineTextProcessor
