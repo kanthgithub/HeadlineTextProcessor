@@ -1,8 +1,8 @@
-# HeadlineTestProcessor
+# HeadlineTextProcessor
 
 ## Problem-Statement:
 
-Given the file headlines.zip which contains a CSV file of the headlines and the date it appeared,
+ Given the file headlines.zip which contains a CSV file of the headlines and the date it appeared for:
 
 ### Sample Input:
 
@@ -36,8 +36,7 @@ Russia ponders space tourism deal.
 Zabaleta advances in Austria
 ```
 
-Return a file of the results in CSV format, and the program used for generating it. You may use any programming language(except Brainfuck).
-
+- Return a file of the results in CSV format, and the program used for generating it.
 
 ### Approach:
 
