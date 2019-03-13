@@ -1,8 +1,24 @@
 package io.headlines.transformers;
 
-public class FirstWordTransformer implements HeadlineTextTransformer {
+import io.headlines.model.HeadlineTextModel;
+import org.springframework.util.StringUtils;
+
+public class FirstWordTransformer implements TransformerChain {
+
+    private TransformerChain nextInChain;
+
     @Override
-    public String transform(String text) {
-        return null;
+    public void transform(HeadlineTextModel text) {
+        if (StringUtils.isEmpty(text.getHeadlineText())) {
+            System.out.println("Invalid Request content for FirstWordTransformer");
+        } else {
+            nextInChain.transform(text);
+        }
+    }
+
+
+    @Override
+    public void setNext(TransformerChain nextInTransformerChain) {
+        nextInChain = nextInTransformerChain;
     }
 }
