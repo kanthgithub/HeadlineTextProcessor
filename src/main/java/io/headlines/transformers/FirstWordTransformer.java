@@ -12,7 +12,9 @@ public class FirstWordTransformer implements TransformerChain {
         if (StringUtils.isEmpty(text.getHeadlineText())) {
             System.out.println("Invalid Request content for FirstWordTransformer");
         } else {
-            nextInChain.transform(text);
+            if(nextInChain!=null) {
+                nextInChain.transform(text);
+            }
         }
     }
 

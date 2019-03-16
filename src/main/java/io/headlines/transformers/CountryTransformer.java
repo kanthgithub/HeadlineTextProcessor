@@ -12,7 +12,10 @@ public class CountryTransformer implements TransformerChain {
         if (StringUtils.isEmpty(text.getHeadlineText())) {
             System.out.println("Invalid Request content for CountryTransformer");
         } else {
-            nextInChain.transform(text);
+
+            if(nextInChain!=null) {
+                nextInChain.transform(text);
+            }
         }
     }
 

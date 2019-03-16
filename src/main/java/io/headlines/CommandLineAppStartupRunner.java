@@ -45,6 +45,8 @@ public class CommandLineAppStartupRunner implements CommandLineRunner {
 
         Path fileNamePathObject = Paths.get(fileNamePath);
 
+        logger.info("parsing fileName - {} ",fileNamePathObject);
+
         List<HeadlineTextModel> headlines_transformed = headlineTextProcessingService.transformHeadlineTextData(fileNamePathObject);
 
         headlineRendererService.renderHeadlines(headlines_transformed);

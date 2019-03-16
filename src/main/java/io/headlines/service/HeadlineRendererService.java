@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface HeadlineRendererService {
 
-    public void renderHeadlines(List<HeadlineTextModel> headlineTextModels);
+    public Boolean renderHeadlines(List<HeadlineTextModel> headlineTextModels);
 }

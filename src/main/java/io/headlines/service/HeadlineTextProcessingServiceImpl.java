@@ -3,6 +3,8 @@ package io.headlines.service;
 import io.headlines.common.FileReaderUtil;
 import io.headlines.model.HeadlineTextModel;
 import io.headlines.transformers.TransformerChain;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,8 @@ import java.util.stream.Collectors;
 @Service
 public class HeadlineTextProcessingServiceImpl implements HeadlineTextProcessingService {
 
+    Logger log = LoggerFactory.getLogger(HeadlineTextProcessingServiceImpl.class);
+
     private TransformerChain transformerChain;
 
     @Autowired
@@ -22,6 +26,9 @@ public class HeadlineTextProcessingServiceImpl implements HeadlineTextProcessing
 
     @Override
     public List<HeadlineTextModel> transformHeadlineTextData(Path file) {
+
+        log.info("parsing file: {}",file.getFileName());
+
         return parseHeadlineTextData(file).stream()
                 .map(headlineText -> transformHeadlineText(headlineText)).collect(Collectors.toList());
     }
@@ -39,7 +46,7 @@ public class HeadlineTextProcessingServiceImpl implements HeadlineTextProcessing
                                 HeadlineTextModel headlineTextModel = new HeadlineTextModel();
                                 String[] entryList = entry.split(",");
                                 headlineTextModel.setTime(Integer.valueOf(entryList[0]));
-                                headlineTextModel.setHeadlineText(entryList[0]);
+                                headlineTextModel.setHeadlineText(entryList[1]);
                                 return headlineTextModel;
                 }).collect(Collectors.toList());
     }

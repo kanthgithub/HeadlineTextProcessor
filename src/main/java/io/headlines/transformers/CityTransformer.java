@@ -14,8 +14,9 @@ public class CityTransformer implements TransformerChain {
         } else {
 
             //TODO
-
-            nextInChain.transform(text);
+            if(nextInChain!=null) {
+                nextInChain.transform(text);
+            }
         }
     }
 

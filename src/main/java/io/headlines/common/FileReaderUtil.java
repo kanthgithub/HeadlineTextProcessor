@@ -27,6 +27,7 @@ public class FileReaderUtil {
 
         try {
             lines = Files.readAllLines(filePath);
+            lines.remove(0);
         } catch (IOException e) {
             log.error("error while reading file: {}",filePath.getFileName());
         }
@@ -51,11 +52,15 @@ public class FileReaderUtil {
 
         testFilePath.getParent().toFile().mkdirs();
 
+        log.info("about to create new file: {} at directory: {}",fileNamePath,testFilePath.getParent().toFile().exists());
+
         try {
             file.createNewFile();
         } catch (FileAlreadyExistsException e) {
-            System.err.println("already exists: " + e.getMessage());
+            log.error("already exists: " + e.getMessage());
         }
+
+        log.info("created new File Object: {}",file);
 
         return testFilePath;
     }
