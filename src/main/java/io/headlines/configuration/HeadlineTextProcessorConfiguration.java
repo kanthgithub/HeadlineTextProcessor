@@ -1,5 +1,7 @@
 package io.headlines.configuration;
 
+import io.headlines.service.HeadlineTextProcessingService;
+import io.headlines.service.HeadlineTextProcessingServiceImpl;
 import io.headlines.transformers.CityTransformer;
 import io.headlines.transformers.CountryTransformer;
 import io.headlines.transformers.FirstWordTransformer;
@@ -22,5 +24,10 @@ public class HeadlineTextProcessorConfiguration {
         transformerChain_2.setNext(transformerChain_3);
 
         return transformerChain_1;
+    }
+
+    @Bean
+    public HeadlineTextProcessingService headlineTextProcessingService(TransformerChain transformerChain){
+        return new HeadlineTextProcessingServiceImpl(transformerChain);
     }
 }
