@@ -1,5 +1,8 @@
 package io.headlines.common;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.FileAlreadyExistsException;
@@ -10,14 +13,25 @@ import java.util.List;
 
 public class FileReaderUtil {
 
+    static Logger log = LoggerFactory.getLogger(FileReaderUtil.class);
+
     /**
      *
      * @param filePath
      * @return Collection of lines read from file
      * @throws Exception
      */
-    public static List<String> readFileTextToLines(Path filePath) throws Exception{
-       return Files.readAllLines(filePath);
+    public static List<String> readFileTextToLines(Path filePath) {
+
+        List<String> lines = null;
+
+        try {
+            lines = Files.readAllLines(filePath);
+        } catch (IOException e) {
+            log.error("error while reading file: {}",filePath.getFileName());
+        }
+
+        return lines;
     }
 
     /**
@@ -45,6 +59,4 @@ public class FileReaderUtil {
 
         return testFilePath;
     }
-
-
 }
