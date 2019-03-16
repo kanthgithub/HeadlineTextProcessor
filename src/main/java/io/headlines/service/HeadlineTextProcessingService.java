@@ -9,7 +9,7 @@ public interface HeadlineTextProcessingService {
 
   public List<HeadlineTextModel> parseHeadlineTextData(Path file);
 
-  public List<String> transformHeadlineTextData(Path file);
+  public List<HeadlineTextModel> transformHeadlineTextData(Path file);
 
-  public String transformHeadlineText(HeadlineTextModel headlineText);
+  public HeadlineTextModel transformHeadlineText(HeadlineTextModel headlineText);
 }

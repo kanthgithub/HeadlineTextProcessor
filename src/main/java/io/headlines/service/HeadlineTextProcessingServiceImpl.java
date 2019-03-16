@@ -21,15 +21,15 @@ public class HeadlineTextProcessingServiceImpl implements HeadlineTextProcessing
     }
 
     @Override
-    public List<String> transformHeadlineTextData(Path file) {
+    public List<HeadlineTextModel> transformHeadlineTextData(Path file) {
         return parseHeadlineTextData(file).stream()
                 .map(headlineText -> transformHeadlineText(headlineText)).collect(Collectors.toList());
     }
 
     @Override
-    public String transformHeadlineText(HeadlineTextModel headlineText) {
+    public HeadlineTextModel transformHeadlineText(HeadlineTextModel headlineText) {
         transformerChain.transform(headlineText);
-        return headlineText.getHeadlineText();
+        return headlineText;
     }
 
     @Override

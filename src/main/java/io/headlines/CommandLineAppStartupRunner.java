@@ -1,5 +1,7 @@
 package io.headlines;
 
+import io.headlines.model.HeadlineTextModel;
+import io.headlines.service.HeadlineRendererService;
 import io.headlines.service.HeadlineTextProcessingService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Component;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 
@@ -20,6 +23,9 @@ public class CommandLineAppStartupRunner implements CommandLineRunner {
 
     @Autowired
     HeadlineTextProcessingService headlineTextProcessingService;
+
+    @Autowired
+    HeadlineRendererService headlineRendererService;
 
     @Autowired
     public CommandLineAppStartupRunner(HeadlineTextProcessingService headlineTextProcessingService) {
@@ -39,7 +45,9 @@ public class CommandLineAppStartupRunner implements CommandLineRunner {
 
         Path fileNamePathObject = Paths.get(fileNamePath);
 
-        headlineTextProcessingService.transformHeadlineTextData(fileNamePathObject);
+        List<HeadlineTextModel> headlines_transformed = headlineTextProcessingService.transformHeadlineTextData(fileNamePathObject);
+
+        headlineRendererService.renderHeadlines(headlines_transformed);
 
         scanner.close();
 
