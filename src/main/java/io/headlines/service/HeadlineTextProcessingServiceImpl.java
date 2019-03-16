@@ -3,15 +3,19 @@ package io.headlines.service;
 import io.headlines.common.FileReaderUtil;
 import io.headlines.model.HeadlineTextModel;
 import io.headlines.transformers.TransformerChain;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class HeadlineTextProcessingServiceImpl implements HeadlineTextProcessingService {
 
     private TransformerChain transformerChain;
 
+    @Autowired
     public HeadlineTextProcessingServiceImpl(TransformerChain transformerChain) {
         this.transformerChain = transformerChain;
     }
