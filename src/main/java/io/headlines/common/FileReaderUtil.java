@@ -48,8 +48,6 @@ public class FileReaderUtil {
 
         File file = new File(fileNamePath);
 
-        file.deleteOnExit();
-
         testFilePath.getParent().toFile().mkdirs();
 
         log.info("about to create new file: {} at directory: {}",fileNamePath,testFilePath.getParent().toFile().exists());

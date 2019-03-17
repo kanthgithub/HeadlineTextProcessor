@@ -38,7 +38,7 @@ public class HeadlineRendererServiceImpl implements HeadlineRendererService {
         Path renderedFilePath = null;
 
         try {
-            renderedFilePath = FileReaderUtil.createNewFile("/transformed/abcnews-date-text"+"_"+System.currentTimeMillis()+".csv");
+            renderedFilePath = FileReaderUtil.createNewFile("/tmp/transformed/abcnews-date-text"+"_"+System.currentTimeMillis()+".csv");
             Files.write(renderedFilePath, csvFileData.getBytes());
         } catch (IOException e) {
             log.error("Error caught while rendering transformed data in: {}",renderedFilePath);
