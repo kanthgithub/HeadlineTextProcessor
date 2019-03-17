@@ -12,6 +12,14 @@ public class FirstWordTransformer implements TransformerChain {
         if (StringUtils.isEmpty(text.getHeadlineText())) {
             System.out.println("Invalid Request content for FirstWordTransformer");
         } else {
+
+            //capitalize first word
+            String headlineText = text.getHeadlineText();
+
+            String newStr = headlineText.substring(0, 1).toUpperCase() + headlineText.substring(1);
+
+            text.setHeadlineText(newStr);
+
             if(nextInChain!=null) {
                 nextInChain.transform(text);
             }

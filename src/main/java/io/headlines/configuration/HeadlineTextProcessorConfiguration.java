@@ -1,5 +1,6 @@
 package io.headlines.configuration;
 
+import io.headlines.service.JsonDataDictionaryService;
 import io.headlines.service.HeadlineRendererService;
 import io.headlines.service.HeadlineRendererServiceImpl;
 import io.headlines.service.HeadlineTextProcessingService;
@@ -36,5 +37,10 @@ public class HeadlineTextProcessorConfiguration {
     @Bean
     public HeadlineRendererService headlineRendererService(){
         return  new HeadlineRendererServiceImpl();
+    }
+
+    @Bean
+    public JsonDataDictionaryService cityJsonDataDictionaryService(){
+        return new JsonDataDictionaryService();
     }
 }
