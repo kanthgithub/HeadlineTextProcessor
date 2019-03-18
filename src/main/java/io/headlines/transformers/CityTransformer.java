@@ -2,13 +2,21 @@ package io.headlines.transformers;
 
 import io.headlines.model.HeadlineTextModel;
 import io.headlines.service.JsonDataDictionaryService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+@Service
 public class CityTransformer implements TransformerChain {
 
     private TransformerChain nextInChain;
 
     private JsonDataDictionaryService jsonDataDictionaryService;
+
+    @Autowired
+    public CityTransformer(JsonDataDictionaryService jsonDataDictionaryService) {
+        this.jsonDataDictionaryService = jsonDataDictionaryService;
+    }
 
     @Override
     public void transform(HeadlineTextModel text) {
