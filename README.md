@@ -40,4 +40,32 @@ Zabaleta advances in Austria
 
 ### Approach:
 
-- Generate a dictionary of Countries and Cities
+- Generate a dictionary of Countries and Cities from comprehensive
+  list of Countries and Cities data is downloaded from web as json
+
+- Implementation of text transformation uses Chain of Responsibility pattern
+
+- Stages:
+
+  - Capitalize first word
+  - Search for mentions of Countries and capitalize the mentions
+  - Search for mentions of Cities and capitalize the mentions
+
+### Maintainability:
+
+- New stages can be added to chain or existing nodes can be reordered
+
+### Open Close Principle:
+
+- Algorithm to search for mentions and transformation can be enhanced in sub-classes
+
+### References:
+
+#### High-performance search Library:
+- https://johannburkard.de/software/stringsearch/
+
+#### StringSearchAlgorithm
+- http://stringsearchalgorithms.amygdalum.net/
+
+#### A Java library for byte pattern matching and searching
+- https://github.com/nishihatapalmer/byteseek
