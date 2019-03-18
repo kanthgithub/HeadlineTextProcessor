@@ -12,7 +12,6 @@ import java.io.File;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
 @Service
@@ -24,23 +23,20 @@ public class JsonDataDictionaryService {
 
     private static final Logger log = LoggerFactory.getLogger(JsonDataDictionaryService.class);
 
-    private static final ConcurrentHashMap<String, Set<String>> cityMap = new ConcurrentHashMap<>();
+    private Set cities = new HashSet();
 
-    private static Set cities = new HashSet();
-    private static Set countries = new HashSet();
+    private Set countries = new HashSet();
 
     @PostConstruct
-    public void load() throws Exception{
+    private void init() throws Exception{
 
         ObjectMapper objectMapper = new ObjectMapper();
 
         CityModelWrapper cityModelWrapper = objectMapper.readValue(new File(CITIES_JSON), CityModelWrapper.class);
-        log.info("cityModelWrapper: {}",cityModelWrapper);
         cities = cityModelWrapper.getCities().stream().map(city -> city.getName()).collect(Collectors.toSet());
         log.info("cities: {}",cities);
 
         CountryModelWrapper countryModelWrapper = objectMapper.readValue(new File(COUNTRIES_JSON), CountryModelWrapper.class);
-        log.info("CountryModelWrapper: {}",countryModelWrapper);
         countries = countryModelWrapper.getCountries().stream().map(country -> country.getName()).collect(Collectors.toSet());
         log.info("countries: {}",countries);
     }
@@ -67,7 +63,7 @@ public class JsonDataDictionaryService {
 
 
 
-    public static class CityModelWrapper {
+    private class CityModelWrapper {
          List<CityModel> cities;
 
         public List<CityModel> getCities() {
@@ -89,7 +85,7 @@ public class JsonDataDictionaryService {
     }
 
 
-    public static class CountryModelWrapper {
+    private class CountryModelWrapper {
         List<CountryModel> countries;
 
         public List<CountryModel> getCountries() {
