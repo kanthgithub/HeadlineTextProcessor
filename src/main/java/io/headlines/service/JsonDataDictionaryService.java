@@ -45,20 +45,27 @@ public class JsonDataDictionaryService {
         log.info("countries: {}",countries);
     }
 
-    public Set<String> getCitiesByCountryCode(){
-
-        return null;
+    public String transformCityMentionString(String textToken){
+        return searchForMentionsAndTransform(textToken,cities);
     }
 
-    public Set<String> getCitiesByCountryName(){
-
-        return null;
+    public String transformCountryMentionString(String textToken){
+        return searchForMentionsAndTransform(textToken,countries);
     }
 
-    public Set<String> getAllCities(){
+    public String searchForMentionsAndTransform(String textToken,Set<String> dictionaryTokens){
 
-        return cities;
+        String transformedMentionString = null;
+
+
+
+
+
+
+        return transformedMentionString;
     }
+
+
 
     public static class CityModelWrapper {
          List<CityModel> cities;

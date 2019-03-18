@@ -1,11 +1,14 @@
 package io.headlines.transformers;
 
 import io.headlines.model.HeadlineTextModel;
+import io.headlines.service.JsonDataDictionaryService;
 import org.springframework.util.StringUtils;
 
 public class CityTransformer implements TransformerChain {
 
     private TransformerChain nextInChain;
+
+    private JsonDataDictionaryService jsonDataDictionaryService;
 
     @Override
     public void transform(HeadlineTextModel text) {
@@ -13,9 +16,8 @@ public class CityTransformer implements TransformerChain {
             System.out.println("Invalid Request content for CityTransformer");
         } else {
 
+            jsonDataDictionaryService.transformCityMentionString(text.getHeadlineText());
 
-
-            //TODO
             if(nextInChain!=null) {
                 nextInChain.transform(text);
             }
