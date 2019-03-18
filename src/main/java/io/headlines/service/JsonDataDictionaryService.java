@@ -3,6 +3,7 @@ package io.headlines.service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.headlines.model.CityModel;
 import io.headlines.model.CountryModel;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,8 @@ import java.io.File;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 @Service
@@ -28,7 +31,7 @@ public class JsonDataDictionaryService {
     private Set countries = new HashSet();
 
     @PostConstruct
-    private void init() throws Exception{
+    public void init() throws Exception{
 
         ObjectMapper objectMapper = new ObjectMapper();
 
@@ -51,19 +54,23 @@ public class JsonDataDictionaryService {
 
     public String searchForMentionsAndTransform(String textToken,Set<String> dictionaryTokens){
 
-        String transformedMentionString = null;
+        String transformedMentionString = textToken;
 
 
+        String patternString = "\\b(" + StringUtils.join(dictionaryTokens, "|") + ")\\b";
+        Pattern pattern = Pattern.compile(patternString);
+        Matcher matcher = pattern.matcher(textToken);
 
-
-
+        while (matcher.find()) {
+            log.info("matched String: {} ",matcher.group(1));
+        }
 
         return transformedMentionString;
     }
 
 
 
-    private class CityModelWrapper {
+    public static class CityModelWrapper {
          List<CityModel> cities;
 
         public List<CityModel> getCities() {
@@ -85,7 +92,7 @@ public class JsonDataDictionaryService {
     }
 
 
-    private class CountryModelWrapper {
+    public static class CountryModelWrapper {
         List<CountryModel> countries;
 
         public List<CountryModel> getCountries() {
