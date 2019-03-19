@@ -63,7 +63,7 @@ Zabaleta advances in Austria
 
  - String-Search Algorithm
 
-    - WuManber -- A fast algorithm for multi-pattern searching
+    - QGramShiftOr -- A fast algorithm for multi-pattern searching
 
 ### References:
 

@@ -63,15 +63,15 @@ public class JsonDataDictionaryService {
 
     public static String searchForMentionsAndTransform(String textToken, Set<String> dictionaryTokens) {
 
-        QGramShiftOr stringSearch_WuManber = new QGramShiftOr(dictionaryTokens);
+        QGramShiftOr stringSearch_QGramShiftOr = new QGramShiftOr(dictionaryTokens);
         String capitalizedTokenText = WordUtils.capitalizeFully(textToken);
-        CharProvider text_WuManber = new StringCharProvider(capitalizedTokenText, 0);
-        StringFinder finder_WuManber = stringSearch_WuManber.createFinder(text_WuManber, LONGEST_MATCH, NON_OVERLAP,NON_EMPTY);
-        List<StringMatch> all_WuManber = finder_WuManber.findAll();
+        CharProvider text_QGramShiftOr = new StringCharProvider(capitalizedTokenText, 0);
+        StringFinder finder_QGramShiftOr = stringSearch_QGramShiftOr.createFinder(text_QGramShiftOr, LONGEST_MATCH, NON_OVERLAP,NON_EMPTY);
+        List<StringMatch> all_QGramShiftOr = finder_QGramShiftOr.findAll();
 
         String transformedString = textToken;
 
-        for(StringMatch stringMatch : all_WuManber){
+        for(StringMatch stringMatch : all_QGramShiftOr){
            Long startIndex =  stringMatch.start();
            Long endIndex = stringMatch.end();
            String text = stringMatch.text();
