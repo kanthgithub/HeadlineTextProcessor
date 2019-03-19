@@ -5,7 +5,7 @@ import io.headlines.model.CityModel;
 import io.headlines.model.CountryModel;
 import net.amygdalum.stringsearchalgorithms.search.StringFinder;
 import net.amygdalum.stringsearchalgorithms.search.StringMatch;
-import net.amygdalum.stringsearchalgorithms.search.chars.WuManber;
+import net.amygdalum.stringsearchalgorithms.search.chars.QGramShiftOr;
 import net.amygdalum.util.io.CharProvider;
 import net.amygdalum.util.io.StringCharProvider;
 import org.apache.commons.text.WordUtils;
@@ -21,6 +21,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import static net.amygdalum.stringsearchalgorithms.search.MatchOption.LONGEST_MATCH;
+import static net.amygdalum.stringsearchalgorithms.search.MatchOption.NON_EMPTY;
 import static net.amygdalum.stringsearchalgorithms.search.MatchOption.NON_OVERLAP;
 
 @Service
@@ -51,23 +52,21 @@ public class JsonDataDictionaryService {
     }
 
     public String transformCityMentionString(String textToken) {
-        log.debug("searchForMentionsAndTransform - City for {}",textToken);
 
         return searchForMentionsAndTransform(textToken, cities);
     }
 
     public String transformCountryMentionString(String textToken) {
 
-        log.debug("searchForMentionsAndTransform - Country for {}",textToken);
-
         return searchForMentionsAndTransform(textToken, countries);
     }
 
     public static String searchForMentionsAndTransform(String textToken, Set<String> dictionaryTokens) {
 
-        WuManber stringSearch_WuManber = new WuManber(dictionaryTokens);
-        CharProvider text_WuManber = new StringCharProvider(WordUtils.capitalizeFully(textToken), 0);
-        StringFinder finder_WuManber = stringSearch_WuManber.createFinder(text_WuManber, LONGEST_MATCH, NON_OVERLAP);
+        QGramShiftOr stringSearch_WuManber = new QGramShiftOr(dictionaryTokens);
+        String capitalizedTokenText = WordUtils.capitalizeFully(textToken);
+        CharProvider text_WuManber = new StringCharProvider(capitalizedTokenText, 0);
+        StringFinder finder_WuManber = stringSearch_WuManber.createFinder(text_WuManber, LONGEST_MATCH, NON_OVERLAP,NON_EMPTY);
         List<StringMatch> all_WuManber = finder_WuManber.findAll();
 
         String transformedString = textToken;
@@ -77,7 +76,9 @@ public class JsonDataDictionaryService {
            Long endIndex = stringMatch.end();
            String text = stringMatch.text();
            String replaceWithText = WordUtils.capitalizeFully(text);
-           transformedString = transformedString.replace(transformedString.substring(startIndex.intValue(),endIndex.intValue()), replaceWithText);
+           if(dictionaryTokens.contains(replaceWithText)) {
+               transformedString = transformedString.replace(transformedString.substring(startIndex.intValue(), endIndex.intValue()), replaceWithText);
+           }
         }
 
         return transformedString;

@@ -41,7 +41,8 @@ public class HeadlineTextProcessingServiceImpl implements HeadlineTextProcessing
 
     @Override
     public List<HeadlineTextModel> parseHeadlineTextData(Path file) {
-        return FileReaderUtil.readFileTextToLines(file).stream()
+        log.info("parseHeadlineTextData called for file: {}",file.getFileName());
+        List<HeadlineTextModel>  headlineTextModels = FileReaderUtil.readFileTextToLines(file).stream()
                 .map(entry -> {
                                 HeadlineTextModel headlineTextModel = new HeadlineTextModel();
                                 String[] entryList = entry.split(",");
@@ -49,5 +50,9 @@ public class HeadlineTextProcessingServiceImpl implements HeadlineTextProcessing
                                 headlineTextModel.setHeadlineText(entryList[1]);
                                 return headlineTextModel;
                 }).collect(Collectors.toList());
+
+        log.info("parsed to data: headlineTextModels {} - called for file: {}",headlineTextModels,file.getFileName());
+
+        return headlineTextModels;
     }
 }

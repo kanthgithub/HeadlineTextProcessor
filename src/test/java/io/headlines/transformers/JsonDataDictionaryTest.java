@@ -15,9 +15,9 @@ public class JsonDataDictionaryTest {
     public void test_Assert_Country_Match(){
 
         //given
-        String textToken = "air nz strike australia to affect australiatravellers";
+        String textToken = "Saudi arabia tells arabs war on iraq inevitable";
         Set<String> dictionaryTokens = new HashSet<String>();
-        dictionaryTokens.add("Australia");
+        dictionaryTokens.add("Iraq");
 
         //when
         String transformedString_Actual =
@@ -25,7 +25,7 @@ public class JsonDataDictionaryTest {
 
         //then
         assertNotNull(transformedString_Actual);
-        assertEquals("air nz strike Australia to affect Australiatravellers",transformedString_Actual);
+        assertEquals("Saudi arabia tells arabs war on Iraq inevitable",transformedString_Actual);
     }
 
     @Test

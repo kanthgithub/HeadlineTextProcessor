@@ -59,6 +59,12 @@ Zabaleta advances in Austria
 
 - Algorithm to search for mentions and transformation can be enhanced in sub-classes
 
+### Algorithm:
+
+ - String-Search Algorithm
+
+    - WuManber -- A fast algorithm for multi-pattern searching
+
 ### References:
 
 #### High-performance search Library:
