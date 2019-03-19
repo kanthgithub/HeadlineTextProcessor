@@ -3,7 +3,11 @@ package io.headlines.service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.headlines.model.CityModel;
 import io.headlines.model.CountryModel;
-import org.apache.commons.lang3.StringUtils;
+import net.amygdalum.stringsearchalgorithms.search.StringFinder;
+import net.amygdalum.stringsearchalgorithms.search.StringMatch;
+import net.amygdalum.stringsearchalgorithms.search.chars.WuManber;
+import net.amygdalum.util.io.CharProvider;
+import net.amygdalum.util.io.StringCharProvider;
 import org.apache.commons.text.WordUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,9 +18,10 @@ import java.io.File;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+
+import static net.amygdalum.stringsearchalgorithms.search.MatchOption.LONGEST_MATCH;
+import static net.amygdalum.stringsearchalgorithms.search.MatchOption.NON_OVERLAP;
 
 @Service
 public class JsonDataDictionaryService {
@@ -46,42 +51,36 @@ public class JsonDataDictionaryService {
     }
 
     public String transformCityMentionString(String textToken) {
-        log.info("searchForMentionsAndTransform - City for {}",textToken);
+        log.debug("searchForMentionsAndTransform - City for {}",textToken);
 
         return searchForMentionsAndTransform(textToken, cities);
     }
 
     public String transformCountryMentionString(String textToken) {
 
-        log.info("searchForMentionsAndTransform - Country for {}",textToken);
+        log.debug("searchForMentionsAndTransform - Country for {}",textToken);
 
         return searchForMentionsAndTransform(textToken, countries);
     }
 
     public static String searchForMentionsAndTransform(String textToken, Set<String> dictionaryTokens) {
 
-        String transformedMentionString = textToken;
-        String patternString = "\\b(" +StringUtils.join(dictionaryTokens, "|") + ")\\b";
-        log.info("pattern string: {}",patternString);
-        Pattern pattern = Pattern.compile(patternString);
-        Matcher matcher = pattern.matcher(textToken);
+        WuManber stringSearch_WuManber = new WuManber(dictionaryTokens);
+        CharProvider text_WuManber = new StringCharProvider(WordUtils.capitalizeFully(textToken), 0);
+        StringFinder finder_WuManber = stringSearch_WuManber.createFinder(text_WuManber, LONGEST_MATCH, NON_OVERLAP);
+        List<StringMatch> all_WuManber = finder_WuManber.findAll();
 
-        while (matcher.find()) {
+        String transformedString = textToken;
 
-            log.info("matcher matches the token");
-
-            String mention = matcher.group(0);
-
-                if(mention!=null){
-                    log.info("matched String: {} at index: {} ", mention,String.valueOf(0));
-                    String capitalizedMention = WordUtils.capitalize(mention);
-                    log.info("capitalized String:{} to {}",mention,capitalizedMention);
-                    transformedMentionString =
-                            transformedMentionString.replaceAll(mention, capitalizedMention);
-            }
+        for(StringMatch stringMatch : all_WuManber){
+           Long startIndex =  stringMatch.start();
+           Long endIndex = stringMatch.end();
+           String text = stringMatch.text();
+           String replaceWithText = WordUtils.capitalizeFully(text);
+           transformedString = transformedString.replace(transformedString.substring(startIndex.intValue(),endIndex.intValue()), replaceWithText);
         }
 
-        return transformedMentionString;
+        return transformedString;
     }
 
     public static class CityModelWrapper {
