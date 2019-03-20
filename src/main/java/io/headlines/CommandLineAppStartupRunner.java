@@ -49,7 +49,7 @@ public class CommandLineAppStartupRunner implements CommandLineRunner {
 
         List<HeadlineTextModel> headlines_transformed = headlineTextProcessingService.transformHeadlineTextData(fileNamePathObject);
 
-        logger.info("Transformed-Headlines: {}",headlines_transformed);
+        logger.info("Transformed-Headlines with count: {}",headlines_transformed.size());
 
         headlineRendererService.renderHeadlines(headlines_transformed);
 
