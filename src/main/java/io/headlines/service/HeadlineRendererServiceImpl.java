@@ -23,7 +23,7 @@ public class HeadlineRendererServiceImpl implements HeadlineRendererService {
     @Override
     public Boolean renderHeadlines(List<HeadlineTextModel> headlineTextModels) {
 
-        log.info("renderHeadlines for data : {}",headlineTextModels.size());
+        log.debug("renderHeadlines for data : {}",headlineTextModels.size());
 
         Boolean isSuccessful = Boolean.TRUE;
 
@@ -33,7 +33,7 @@ public class HeadlineRendererServiceImpl implements HeadlineRendererService {
 
         String csvFileData = headerFieldsAsCSV+recordDataAsCsv;
 
-        log.info("writing csv-data : {}",csvFileData);
+        log.debug("writing csv-data : {}",csvFileData);
 
         Path renderedFilePath = null;
 
@@ -44,6 +44,8 @@ public class HeadlineRendererServiceImpl implements HeadlineRendererService {
             log.error("Error caught while rendering transformed data in: {}",renderedFilePath);
             isSuccessful = Boolean.FALSE;
         }
+
+        log.info("HeadlineTextProcessing Completed Successfully");
 
         return isSuccessful;
     }

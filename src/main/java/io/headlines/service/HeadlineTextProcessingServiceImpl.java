@@ -27,7 +27,7 @@ public class HeadlineTextProcessingServiceImpl implements HeadlineTextProcessing
     @Override
     public List<HeadlineTextModel> transformHeadlineTextData(Path file) {
 
-        log.info("parsing file: {}",file.getFileName());
+        log.debug("parsing file: {}",file.getFileName());
 
         return parseHeadlineTextData(file).stream()
                 .map(headlineText -> transformHeadlineText(headlineText)).collect(Collectors.toList());
@@ -41,7 +41,7 @@ public class HeadlineTextProcessingServiceImpl implements HeadlineTextProcessing
 
     @Override
     public List<HeadlineTextModel> parseHeadlineTextData(Path file) {
-        log.info("parseHeadlineTextData called for file: {}",file.getFileName());
+        log.debug("parseHeadlineTextData called for file: {}",file.getFileName());
         List<HeadlineTextModel>  headlineTextModels = FileReaderUtil.readFileTextToLines(file).stream()
                 .map(entry -> {
                                 HeadlineTextModel headlineTextModel = new HeadlineTextModel();
@@ -51,7 +51,7 @@ public class HeadlineTextProcessingServiceImpl implements HeadlineTextProcessing
                                 return headlineTextModel;
                 }).collect(Collectors.toList());
 
-        log.info("parsed to data: headlineTextModels {} - called for file: {}",headlineTextModels,file.getFileName());
+        log.debug("parsed to data: headlineTextModels {} - called for file: {}",headlineTextModels,file.getFileName());
 
         return headlineTextModels;
     }
