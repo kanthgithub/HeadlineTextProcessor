@@ -19,9 +19,7 @@
  - Walk us through your assumptions. No code needed.
 ```
 
-## Design:
-
-### Solution Design:
+## Solution Design:
 
 #### End-Product:
 
@@ -68,10 +66,38 @@
 - Rate and Review
 - Update Status (On the way, arrived etc)
 - Document Submission
+- Mass Push Notification
+- Payment Detail
+- Services Types
+- Map View
 
-## UI & UX:
+##### Admin Perspective:
 
-App to be designed for :
-- customers
-- Franchises
-- Operations and Support
+- Map View
+- Services Types
+- Counties and Cities
+- Categories & Sub Categories
+- Payment Detail
+- Trips
+- User, Drivers, Store Management
+- Service History
+- Mass Push Notification
+
+## Tech-Stack:
+
+- App to be designed for :
+    - customers
+    - Franchises
+    - Admin (Operations and Support)
+
+- MERN Stack:
+
+  - Database is on mongoDB
+  - Backend services on nodeJS and ExpressJS
+  - Frontend on React-native to support iOS and Andriod
+  - Web-Push for notifications and alerts
+
+## Service Design:
+
+
+
