@@ -28,14 +28,14 @@
 
    **Actors in the System:**
 
-  > Franchise: MicroManagers to manage pickups, deliveries and collection points at multiple locations
+  > __Franchise__: MicroManagers to manage pickups, deliveries and collection points at multiple locations
 
         - manage courier collection by adhoc order or recurring schedule
         - deliver the in-coming couriers to customers
         - dispatch out-going couriers to collection-points at destinations
         - track the vehicles with couriers
 
-  > Customer: Users who want to send and collect couriers
+  > __Customer__: Users who want to send and collect couriers
 
         - register via new ID creation or social login
         - Create a new adhoc schedule for courier pickup or self-service at nearest collection-point
@@ -44,11 +44,15 @@
         - Enter queries or complain about services
         - Rate the franchise or the courier service in general
 
-   > Admin: Central authority to manage all franchises and operations
+   > __Admin__: Central authority to manage all franchises and operations
 
         - Has master access on all Franchises and Customer management
         - RealTime tracking of Franchises and collection points
-        -
+        - Track Orders and payments
+        - Raise alerts to franchises on delays , complaints or queries from customers
+        - Manage data related to customer, Franchise , products and services
+        - Add/Edit payment options
+        - Track Franchise performance
 
 ### Features:
 
@@ -85,8 +89,8 @@
 - Counties and Cities
 - Categories & Sub Categories
 - Payment Detail
-- Trips
-- User, Drivers, Store Management
+- Pickups and Deliveries
+- User, Franchises, Store Management
 - Service History
 - Mass Push Notification
 
@@ -97,7 +101,7 @@
     - Franchises
     - Admin (Operations and Support)
 
-- MERN Stack:
+- __MERN Stack:__
 
   - Database is on mongoDB
   - Backend services on nodeJS and ExpressJS
@@ -106,10 +110,10 @@
 
 ## Service Design:
 
-- Design-Patterns:
+- __Design-Patterns:__
 
-  - SOLID Design principles
-  - CQRS for micro-services
+  - __SOLID__ Design principles
+  - __CQRS__ for micro-services
   - Event-Driven Services (Event as first-class citizen)
      - Eventual Consistency
 
@@ -125,8 +129,8 @@
         1. Card
         2. Bank Account
 
- 2. **OrderCaptureService**
-    - __Accept Scheduled courier-pickup__
+ 2. **OrderService**
+    - __Scheduled courier-pickup__
        - Schedule parameters
             1. Frequency
             2. Start-Date
@@ -165,49 +169,63 @@
 ### Franchise Service components:
 
  1. **FranchiseOnboardingService**
-   - User registration
-   - Set Customer preferences
-   - Set customer base location
+   - Franchise registration
+   - Franchise preferences
+   - Franchise base location
    - Upload KYC Documents
-   - Set Business details (If Customer is a business entity)
-   - Pre-configured Payment options
-        1. Card
-        2. Bank Account
+   - Set Business details
+   - Service Type (Car,Bike,Truck,Giant Movers)
+   - Product Type (House Movers,Document delivery, Gifts, Bulk Items)
 
- 2. **OrderService**
-    - __Schedule courier-pickup__
-       - Schedule parameters
-            1. Frequency
-            2. Start-Date
-            3. End-Date
-            4. ServiceType
-            5. Pickup Address & Coordinates
-            5. Destination Address & Coordinates
-    - __Cancellation__
-        - cancel recurring courier-pickup
-        - delete entire scheduled pickups
-        - delete remaining scheduled pickups
-     - __Amendment__
-        - Amend recurring courier-pickup
-        - Amend schedule
-
-
- 3. **RatingService**
-    - Rate the courier pickup service
-    - Add review for the service
-
- 4. **OrderBlotterService**
+ 2. **FranchiseOrderBlotterService**
     - Blotter to show the active and past pickups
     - Track the Active-Orders with in blotter
     - View Order Details
     - View payment details for an order
 
- 5. **TrackingService**
+ 3. **FranchiseOrderTrackingService**
     - RealTime tracking for picked-up couriers
     - raise alerts and notifications for courier movement
 
- 6. **PaymentService**
-    - Initiate payment for scheduled pickups
+ 4. **FranchisePaymentService**
+    - Initiate paymentRequests for scheduled pickups
         - Pickup event will initiate Payment
-    - Pay for Adhoc Pickups
-    - Topup Prepaid account for scheduled pickups
+    - Receive Payments for Adhoc Pickups
+
+ 5. **FranchiseInternalDashboardService**
+    - Track Payments and receivables
+    - Track Income
+    - Track reviews received
+    - Track HitMiss Events
+
+### Admin Service components:
+
+ 1. **StaticDataMaintenanceService**
+      - Franchise Data management
+      - Customer Data management
+      - Manage KYC Documents workflow for franchises
+      - Service Type management(Car,Bike,Truck,Giant Movers)
+      - Product Type management(House Movers,Document delivery, Gifts, Bulk Items)
+
+ 2. **AdminOrderBlotterService**
+    - Blotter to show the active and past pickups
+    - Track the Active-Orders with in blotter
+    - View Order Details
+    - View payment details for an order
+
+ 3. **MassPushNotificationService**
+    - raise alerts and notifications for courier movement
+    - Raise alerts to Franchises on delays, complaints and queries from customers
+
+ 4. **AdminPaymentService**
+    - Initiate paymentRequests for scheduled pickups
+        - Pickup event will initiate Payment
+    - Receive Payments for Adhoc Pickups
+    - Raise alerts on payment delays
+
+ 5. **AdminInternalDashboardService**
+    - Track Payments and receivables from franchises
+    - Track Income and costs
+    - Track reviews received
+    - Track HitMiss Events for franchises
+    - Analytics for
