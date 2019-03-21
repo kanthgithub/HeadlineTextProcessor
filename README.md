@@ -92,6 +92,10 @@ Zabaleta advances in Austria
  4. render the transformed string to a new output file (same as in input directory)
     1.  Workflow and render are repeated for all input new lines
 
+ 5. Output is rendered as records in csv file in:
+    - Directory: /tmp/transformed/
+    - fileName formatting: abcnews-date-text"+"_"+System.currentTimeMillis()+".csv"
+        - sample: __abcnews-date-text_1552931515616.csv__
 
 ### Usage:
 
@@ -117,11 +121,11 @@ Zabaleta advances in Austria
 
  5. Console should display a command line argument entry for datafile
 
-    Please enter the file name
+    Please enter the file name in command prompt / console
 
 ```
-/Library/Java/JavaVirtualMachines/jdk1.8.0_25.jdk/Contents/Home/bin/java -Dmaven.multiModuleProjectDirectory=/Users/lakshmikanth/Desktop/Propine/headlines -Dmaven.home=/usr/local/Cellar/maven/3.6.0/libexec -Dclassworlds.conf=/usr/local/Cellar/maven/3.6.0/libexec/bin/m2.conf "-javaagent:/Applications/IntelliJ IDEA CE.app/Contents/lib/idea_rt.jar=60385:/Applications/IntelliJ IDEA CE.app/Contents/bin" -Dfile.encoding=UTF-8 -classpath /usr/local/Cellar/maven/3.6.0/libexec/boot/plexus-classworlds-2.5.2.jar org.codehaus.classworlds.Launcher -Didea.version=2018.2.7 spring-boot:run
-objc[10035]: Class JavaLaunchHelper is implemented in both /Library/Java/JavaVirtualMachines/jdk1.8.0_25.jdk/Contents/Home/bin/java (0x10f8614c0) and /Library/Java/JavaVirtualMachines/jdk1.8.0_25.jdk/Contents/Home/jre/lib/libinstrument.dylib (0x10f8d64e0). One of the two will be used. Which one is undefined.
+/Library/Java/JavaVirtualMachines/jdk1.8.0_25.jdk/Contents/Home/bin/java -Dmaven.multiModuleProjectDirectory=/Users/lakshmikanth/Desktop/Propine/headlines -Dmaven.home=/usr/local/Cellar/maven/3.6.0/libexec -Dclassworlds.conf=/usr/local/Cellar/maven/3.6.0/libexec/bin/m2.conf "-javaagent:/Applications/IntelliJ IDEA CE.app/Contents/lib/idea_rt.jar=64665:/Applications/IntelliJ IDEA CE.app/Contents/bin" -Dfile.encoding=UTF-8 -classpath /usr/local/Cellar/maven/3.6.0/libexec/boot/plexus-classworlds-2.5.2.jar org.codehaus.classworlds.Launcher -Didea.version=2018.2.7 spring-boot:run
+objc[45658]: Class JavaLaunchHelper is implemented in both /Library/Java/JavaVirtualMachines/jdk1.8.0_25.jdk/Contents/Home/bin/java (0x102d514c0) and /Library/Java/JavaVirtualMachines/jdk1.8.0_25.jdk/Contents/Home/jre/lib/libinstrument.dylib (0x102dc64e0). One of the two will be used. Which one is undefined.
 [INFO] Scanning for projects...
 [WARNING]
 [WARNING] Some problems were encountered while building the effective model for io.headlines:headlines:jar:1.0
@@ -151,7 +155,7 @@ objc[10035]: Class JavaLaunchHelper is implemented in both /Library/Java/JavaVir
 [INFO]
 [INFO] --- maven-resources-plugin:3.0.2:testResources (default-testResources) @ headlines ---
 [INFO] Using 'UTF-8' encoding to copy filtered resources.
-[INFO] Copying 1 resource
+[INFO] Copying 2 resources
 [INFO]
 [INFO] --- maven-compiler-plugin:3.6.1:testCompile (default-testCompile) @ headlines ---
 [INFO] Nothing to compile - all classes are up to date
@@ -161,9 +165,9 @@ objc[10035]: Class JavaLaunchHelper is implemented in both /Library/Java/JavaVir
 [INFO]
 [INFO] --- spring-boot-maven-plugin:2.0.4.RELEASE:run (default-cli) @ headlines ---
 [INFO] Attaching agents: []
-02:34:47.078 [main] DEBUG org.springframework.boot.devtools.settings.DevToolsSettings - Included patterns for restart : []
-02:34:47.082 [main] DEBUG org.springframework.boot.devtools.settings.DevToolsSettings - Excluded patterns for restart : [/spring-boot-actuator/target/classes/, /spring-boot-devtools/target/classes/, /spring-boot/target/classes/, /spring-boot-starter-[\w-]+/, /spring-boot-autoconfigure/target/classes/, /spring-boot-starter/target/classes/]
-02:34:47.082 [main] DEBUG org.springframework.boot.devtools.restart.ChangeableUrls - Matching URLs for reloading : [file:/Users/lakshmikanth/Desktop/Propine/headlines/target/classes/]
+16:07:52.431 [main] DEBUG org.springframework.boot.devtools.settings.DevToolsSettings - Included patterns for restart : []
+16:07:52.435 [main] DEBUG org.springframework.boot.devtools.settings.DevToolsSettings - Excluded patterns for restart : [/spring-boot-actuator/target/classes/, /spring-boot-devtools/target/classes/, /spring-boot/target/classes/, /spring-boot-starter-[\w-]+/, /spring-boot-autoconfigure/target/classes/, /spring-boot-starter/target/classes/]
+16:07:52.435 [main] DEBUG org.springframework.boot.devtools.restart.ChangeableUrls - Matching URLs for reloading : [file:/Users/lakshmikanth/Desktop/Propine/headlines/target/classes/]
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -173,22 +177,43 @@ objc[10035]: Class JavaLaunchHelper is implemented in both /Library/Java/JavaVir
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::        (v2.0.4.RELEASE)
 
-2019-03-21 02:34:47.396  INFO 10103 --- [  restartedMain] i.h.HeadlineTextProcessingApplication    : Starting HeadlineTextProcessingApplication on lakshmikanthMBP with PID 10103 (/Users/lakshmikanth/Desktop/Propine/headlines/target/classes started by lakshmikanth in /Users/lakshmikanth/Desktop/Propine/headlines)
-2019-03-21 02:34:47.397  INFO 10103 --- [  restartedMain] i.h.HeadlineTextProcessingApplication    : No active profile set, falling back to default profiles: default
-2019-03-21 02:34:47.448  INFO 10103 --- [  restartedMain] s.c.a.AnnotationConfigApplicationContext : Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@5a2e5e05: startup date [Thu Mar 21 02:34:47 IST 2019]; root of context hierarchy
-2019-03-21 02:34:47.862  INFO 10103 --- [  restartedMain] o.s.b.f.s.DefaultListableBeanFactory     : Overriding bean definition for bean 'jsonDataDictionaryService' with a different definition: replacing [Generic bean: class [io.headlines.service.JsonDataDictionaryService]; scope=singleton; abstract=false; lazyInit=false; autowireMode=0; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=null; initMethodName=null; destroyMethodName=null; defined in file [/Users/lakshmikanth/Desktop/Propine/headlines/target/classes/io/headlines/service/JsonDataDictionaryService.class]] with [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=headlineTextProcessorConfiguration; factoryMethodName=jsonDataDictionaryService; initMethodName=null; destroyMethodName=(inferred); defined in class path resource [io/headlines/configuration/HeadlineTextProcessorConfiguration.class]]
-2019-03-21 02:34:48.681  INFO 10103 --- [  restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService
-2019-03-21 02:34:48.691  INFO 10103 --- [  restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService  'threadPoolExecutor'
-2019-03-21 02:34:49.122  INFO 10103 --- [  restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
-2019-03-21 02:34:49.163  INFO 10103 --- [  restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
-2019-03-21 02:34:49.183  INFO 10103 --- [  restartedMain] i.h.HeadlineTextProcessingApplication    : Started HeadlineTextProcessingApplication in 2.085 seconds (JVM running for 2.575)
-2019-03-21 02:34:49.185  INFO 10103 --- [  restartedMain] i.headlines.CommandLineAppStartupRunner  : Application started with command-line arguments: [] .
+2019-03-21 16:07:52.782  INFO 45659 --- [  restartedMain] i.h.HeadlineTextProcessingApplication    : Starting HeadlineTextProcessingApplication on lakshmikanthMBP with PID 45659 (/Users/lakshmikanth/Desktop/Propine/headlines/target/classes started by lakshmikanth in /Users/lakshmikanth/Desktop/Propine/headlines)
+2019-03-21 16:07:52.784  INFO 45659 --- [  restartedMain] i.h.HeadlineTextProcessingApplication    : No active profile set, falling back to default profiles: default
+2019-03-21 16:07:52.846  INFO 45659 --- [  restartedMain] s.c.a.AnnotationConfigApplicationContext : Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@4f7de7: startup date [Thu Mar 21 16:07:52 IST 2019]; root of context hierarchy
+2019-03-21 16:07:53.266  INFO 45659 --- [  restartedMain] o.s.b.f.s.DefaultListableBeanFactory     : Overriding bean definition for bean 'jsonDataDictionaryService' with a different definition: replacing [Generic bean: class [io.headlines.service.JsonDataDictionaryService]; scope=singleton; abstract=false; lazyInit=false; autowireMode=0; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=null; initMethodName=null; destroyMethodName=null; defined in file [/Users/lakshmikanth/Desktop/Propine/headlines/target/classes/io/headlines/service/JsonDataDictionaryService.class]] with [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=headlineTextProcessorConfiguration; factoryMethodName=jsonDataDictionaryService; initMethodName=null; destroyMethodName=(inferred); defined in class path resource [io/headlines/configuration/HeadlineTextProcessorConfiguration.class]]
+2019-03-21 16:07:54.477  INFO 45659 --- [  restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2019-03-21 16:07:54.513  INFO 45659 --- [  restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2019-03-21 16:07:54.540  INFO 45659 --- [  restartedMain] i.h.HeadlineTextProcessingApplication    : Started HeadlineTextProcessingApplication in 2.091 seconds (JVM running for 2.604)
+2019-03-21 16:07:54.543  INFO 45659 --- [  restartedMain] i.headlines.CommandLineAppStartupRunner  : Application started with command-line arguments: [] .
  To kill this application, press Ctrl + C.
 abcnews-date-text.csv
-2019-03-21 02:34:59.885  INFO 10103 --- [  restartedMain] i.headlines.CommandLineAppStartupRunner  : parsing fileName - abcnews-date-text.csv
-2019-03-21 02:34:59.885  INFO 10103 --- [  restartedMain] i.h.s.HeadlineTextProcessingServiceImpl  : parsing file: abcnews-date-text.csv
+2019-03-21 16:07:56.620  INFO 45659 --- [  restartedMain] i.headlines.CommandLineAppStartupRunner  : parsing fileName - abcnews-date-text.csv
+2019-03-21 16:11:40.967  INFO 45659 --- [  restartedMain] i.headlines.CommandLineAppStartupRunner  : Transformed-Headlines with count: 1103665
+2019-03-21 16:11:43.911  INFO 45659 --- [  restartedMain] io.headlines.common.FileReaderUtil       : about to create new file: /tmp/transformed/abcnews-date-text_1553164903910.csv at directory: true
+2019-03-21 16:11:43.913  INFO 45659 --- [  restartedMain] io.headlines.common.FileReaderUtil       : created new File Object: /tmp/transformed/abcnews-date-text_1553164903910.csv
+2019-03-21 16:11:44.240  INFO 45659 --- [  restartedMain] i.h.service.HeadlineRendererServiceImpl  : HeadlineTextProcessing Completed Successfully
+2019-03-21 16:11:44.242  INFO 45659 --- [       Thread-8] s.c.a.AnnotationConfigApplicationContext : Closing org.springframework.context.annotation.AnnotationConfigApplicationContext@4f7de7: startup date [Thu Mar 21 16:07:52 IST 2019]; root of context hierarchy
+2019-03-21 16:11:44.246  INFO 45659 --- [       Thread-8] o.s.j.e.a.AnnotationMBeanExporter        : Unregistering JMX-exposed beans on shutdown
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  03:55 min
+[INFO] Finished at: 2019-03-21T16:11:44+05:30
+[INFO] ------------------------------------------------------------------------
 
+Process finished with exit code 0
 
+```
+
+### Performance:
+
+```
+- Input Dataset: 1103665 records (1.1 million)
+- Start-Time: 16:07:56.620
+- End-Time:   16:11:44.240
+- Duration: 03:48.420
+
+- Average: 03:48 Minutes for 1 Million records
 ```
 
 ### References:

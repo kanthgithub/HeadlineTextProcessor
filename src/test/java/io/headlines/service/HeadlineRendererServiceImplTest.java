@@ -14,7 +14,6 @@ import static org.junit.Assert.assertTrue;
 
 public class HeadlineRendererServiceImplTest {
 
-
     private static  String fileDataDirectory = "/tmp/headlines/output/";
 
     public static String test_Data_File_1 = "/testdata/abcnews-text.csv";
@@ -42,7 +41,6 @@ public class HeadlineRendererServiceImplTest {
         }
     }
 
-
     @Test
     public void assert_Render_Headlines() throws Exception{
 
@@ -62,7 +60,4 @@ public class HeadlineRendererServiceImplTest {
     public HeadlineTextModel getAHeadlineTextModel(String text,Integer time){
         return HeadlineTextModel.builder().headlineText(text).time(time).build();
     }
-
-
-
 }
