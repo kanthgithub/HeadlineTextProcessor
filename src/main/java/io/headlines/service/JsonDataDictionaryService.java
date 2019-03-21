@@ -39,16 +39,13 @@ public class JsonDataDictionaryService {
 
     @PostConstruct
     public void init() throws Exception {
-
         ObjectMapper objectMapper = new ObjectMapper();
 
         CityModelWrapper cityModelWrapper = objectMapper.readValue(new File(CITIES_JSON), CityModelWrapper.class);
         cities = cityModelWrapper.getCities().stream().map(city -> city.getName()).collect(Collectors.toSet());
-        log.debug("cities: {}", cities);
 
         CountryModelWrapper countryModelWrapper = objectMapper.readValue(new File(COUNTRIES_JSON), CountryModelWrapper.class);
         countries = countryModelWrapper.getCountries().stream().map(country -> country.getName()).collect(Collectors.toSet());
-        log.debug("countries: {}", countries);
     }
 
     public String transformCityMentionString(String textToken) {
