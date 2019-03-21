@@ -14,3 +14,40 @@ let f = () => {
 };
 _.retry(f, 3);       //=>  true
 ```
+
+## Solution:
+
+```js
+function retry(func, times) {
+    /// monitor the count
+    var calledCount = 0;
+
+    // update the `calledCount` variable after the `time` has been passed
+    setInterval(function(){ calledCount = 0 }, 1000);
+
+    /// creating a clousre (will be called)
+    return function(){
+        /// checking the limit (if limit is exceeded then do not call the passed function)
+        if (times > calledCount) {
+            /// increase the count
+            calledCount++;
+            func();
+        }
+    };
+}
+```
+
+
+## Usage:
+
+- creating a function to pass in the retry function
+
+```js
+function myCustomFunction(){
+ let d = new Date(); // current time
+  return d.getMilliseconds() % 2 == 0; // => true or false
+ }
+
+// calling the retry function
+retry(myCustomFunction, 3);
+```
