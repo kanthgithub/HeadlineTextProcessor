@@ -48,6 +48,14 @@ public class JsonDataDictionaryService {
         countries = countryModelWrapper.getCountries().stream().map(country -> country.getName()).collect(Collectors.toSet());
     }
 
+    public Set getCities() {
+        return cities;
+    }
+
+    public Set getCountries() {
+        return countries;
+    }
+
     public String transformCityMentionString(String textToken) {
 
         return searchForMentionsAndTransform(textToken, cities);
