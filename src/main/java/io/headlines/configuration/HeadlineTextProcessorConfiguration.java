@@ -27,10 +27,10 @@ public class HeadlineTextProcessorConfiguration {
         TransformerChain transformerChain_1 = new FirstWordTransformer();
 
         TransformerChain transformerChain_2 = new CityTransformer(jsonDataDictionaryService);
-        transformerChain_1.setNext(transformerChain_2);
+        //transformerChain_1.setNext(transformerChain_2);
 
         TransformerChain transformerChain_3 = new CountryTransformer(jsonDataDictionaryService);
-        transformerChain_2.setNext(transformerChain_3);
+        transformerChain_1.setNext(transformerChain_3);
 
         return transformerChain_1;
     }

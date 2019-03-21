@@ -70,7 +70,27 @@ Zabaleta advances in Austria
  - Cities and Country data are stored in  json files ->
     __Cities.json__ , __Countries.json__
  - Json data is loaded in to a Map on startup of Application -> __JsonDataDictionaryService.java__
- -
+ - TransformerChain can be built with pre-programmed unit of chain:
+   - FirstWordTransformer
+   - CityTransformer
+   - CountryTransformer
+
+   - __Configurability__ & __Maintainability__:
+
+        - These transformer units can be joined in any order , which offers flexibility
+        - New Transformer units can be plugged-in as well (Open-Close Principle)
+        - Existing units in chain can be removed easily (Change in configuration)
+
+### Workflow:
+
+ 1. Parse json Data (Static)
+ 2. Load and parse input news-headlines-csv file (Filename provided in command line)
+ 3. Initiate transformation workflow
+    1. Capitalize first word
+    2. Capitalize mentions of cities
+    3. Capitalize mentions of Countries
+ 4. render the transformed string to a new output file (same as in input directory)
+    1.  Workflow and render are repeated for all input new lines
 
 
 ### Usage:
