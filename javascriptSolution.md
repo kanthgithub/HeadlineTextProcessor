@@ -26,9 +26,6 @@ function retry(func, times) {
       times = 1;
     }
 
-    // update the `calledCount` variable after the `time` has been passed
-    setInterval(function(){ calledCount = 0 }, 1000);
-
     /// creating a clousre (will be called)
     return function(){
         /// checking the limit (if limit is exceeded then do not call the passed function)
