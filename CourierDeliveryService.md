@@ -227,5 +227,6 @@
     - Track Payments and receivables from franchises
     - Track Income and costs
     - Track reviews received
-    - Track HitMiss Events for franchises
-    - Analytics for
+    - Track Hit/Miss Events at franchise level
+    - Analytics to track the franchise performance
+    - Analytics to verify HitMiss ratio of courier pickup/collection requests
