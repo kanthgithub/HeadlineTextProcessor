@@ -22,6 +22,10 @@ function retry(func, times) {
     /// monitor the count
     var calledCount = 0;
 
+    if(!times){
+      times = 1;
+    }
+
     // update the `calledCount` variable after the `time` has been passed
     setInterval(function(){ calledCount = 0 }, 1000);
 
